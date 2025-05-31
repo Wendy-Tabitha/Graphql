@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="40" cy="40" r="38" fill="#e5383b" fill-opacity="0.1"/>
+    
+    <!-- Graph Lines -->
+    <path d="M20 50L30 45L40 55L50 35L60 40" stroke="#e5383b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- User Icon -->
+    <circle cx="40" cy="30" r="8" fill="#e5383b"/>
+    <path d="M20 60C20 52.268 28.268 46 40 46C51.732 46 60 52.268 60 60" stroke="#e5383b" stroke-width="4" stroke-linecap="round"/>
+</svg> 
