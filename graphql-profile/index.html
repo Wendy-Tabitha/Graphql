@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphQL Profile Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="login-section" class="container">
+        <div class="login-card">
+            <img src="assets/logo.svg" alt="Logo" class="logo">
+            <h1>Welcome Back</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Sign In</button>
+                <div id="login-error" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Section -->
+    <div id="profile-section" class="container hidden">
+        <nav class="top-nav">
+            <div class="user-info">
+                <span id="user-login"></span>
+            </div>
+            <button id="logout-btn" class="btn-secondary">Logout</button>
+        </nav>
+        
+        <div class="profile-grid">
+            <!-- Stats Cards -->
+            <div class="stats-card">
+                <h3>Total XP</h3>
+                <div id="total-xp" class="stat-value">0</div>
+            </div>
+            <div class="stats-card">
+                <h3>Grade Average</h3>
+                <div id="grade-average" class="stat-value">0%</div>
+            </div>
+            <div class="stats-card">
+                <h3>Projects Completed</h3>
+                <div id="projects-completed" class="stat-value">0</div>
+            </div>
+
+            <!-- Graphs -->
+            <div class="graph-container">
+                <h3>XP Progress</h3>
+                <div id="xp-graph" class="graph"></div>
+            </div>
+            <div class="graph-container">
+                <h3>Project Success Rate</h3>
+                <div id="success-graph" class="graph"></div>
+            </div>
+            <div class="graph-container">
+                <h3>Audit History</h3>
+                <div id="audit-graph" class="graph"></div>
+            </div>
+            <div class="graph-container">
+                <h3>Project Attempts</h3>
+                <div id="attempts-graph" class="graph"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/utils.js"></script>
+    <script src="script/auth.js"></script>
+    <script src="script/graphql.js"></script>
+    <script src="script/charts.js"></script>
+    <script src="script/profile.js"></script>
+</body>
+</html> 
