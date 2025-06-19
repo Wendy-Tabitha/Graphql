@@ -14,31 +14,45 @@ A modern, responsive web application that displays user profile information and 
 
 ```
 graphql-profile/
-├── index.html              # Main entry point
-├── style.css              # Styles
-├── script/
-│   ├── auth.js            # Authentication logic
-│   ├── graphql.js         # GraphQL queries
-│   ├── profile.js         # Profile rendering
-│   ├── charts.js          # SVG chart generation
-│   └── utils.js           # Helper functions
-├── assets/
-│   └── logo.svg           # Application logo
-└── deploy/                # Deployment configuration
+├── index.html      # Main entry point (UI, layout, and view containers)
+├── style.css       # Styles (theme, layout, animations)
+├── main.js         # All JavaScript logic (auth, GraphQL, profile, charts)
+└── assets/         # (Optional) Static assets like logo.svg
 ```
 
 ## Setup
 
-1. Replace `((DOMAIN))` in the following files with your API domain:
-   - `script/auth.js`
-   - `script/graphql.js`
+- Open `index.html` in a web browser or serve it using a local web server.
+- Ensure `main.js` and `style.css` are in the same directory as `index.html`.
+- The app connects to the Zone01 API at **https://learn.zone01kisumu.ke** by default. To change the  API domain, update API_BASE_URL in main.js.
 
-2. Open `index.html` in a web browser or serve it using a local web server.
+## How It Works
 
-## API Endpoints
+### Authentication
 
-- Authentication: `https://((DOMAIN))/api/auth/signin`
-- GraphQL: `https://((DOMAIN))/api/graphql-engine/v1/graphql`
+- The login form is shown by default.
+- Users authenticate with their username/email and password.
+- On successful login, a JWT token is stored in localStorage and used for all GraphQL requests.
+- Logout removes the token and returns to the login form with a fade-out animation and page reload.
+
+### Profile & Dashboard
+
+- After login, the profile view is shown with a fade-in animation.
+- The dashboard displays:
+User info (login, user ID, account status)
+XP summary (total XP, top projects by XP)
+Grades summary (pass/fail ratio, projects by type)
+Interactive SVG charts (XP over time, Pass/Fail ratio)
+- Navigation sidebar allows switching between sections (Overview, XP Progress, Grades, Statistics).
+
+### Charts
+- Line Chart: Cumulative XP over time (by month)
+- Pie Chart: Project pass/fail ratio
+- Charts are interactive and animated using SVG (no external libraries)
+
+### Animations
+- Smooth fade-in/fade-out transitions between login and profile views
+- Animated chart rendering and tooltips
 
 ## GraphQL Queries
 
@@ -46,69 +60,62 @@ The application uses several GraphQL queries:
 
 1. User Profile:
    ```graphql
-   query GetUserProfile {
+   {
      user {
        id
        login
-       totalXP
-       grade
-       projects {
-         id
-         name
-         status
-         attempts
-         lastAttempt
-       }
      }
    }
    ```
 
 2. XP Progress:
    ```graphql
-   query GetXPProgress {
-     xpProgress {
-       date
+   {
+     transaction(where: {type: {_eq: "xp"}}) {
+       id
        amount
-     }
-   }
-   ```
-
-3. Project Statistics:
-   ```graphql
-   query GetProjectStats {
-     projectStats {
-       total
-       passed
-       failed
-       attempts {
-         projectId
-         count
+       createdAt
+       path
+       objectId
+       object {
+         name
+         type
        }
      }
    }
    ```
 
-4. Audit History:
+3. Grades & Results:
    ```graphql
-   query GetAuditHistory {
-     audits {
-       date
-       type
-       status
-       details
+   {
+     progress {
+       id
+       userId
+       objectId
+       grade
+       createdAt
+       updatedAt
+       path
+       object {
+         name
+         type
+       }
+     }
+     result {
+       id
+       objectId
+       userId
+       grade
+       createdAt
+       updatedAt
+       path
+       object {
+         name
+         type
+       }
      }
    }
    ```
-
-## Charts
-
-The application includes three types of SVG charts:
-
-1. Line Chart: XP Progress over time
-2. Pie Chart: Project success rate
-3. Bar Chart: Audit history
-
-All charts are responsive and include animations for a better user experience.
 
 ## Browser Support
 
