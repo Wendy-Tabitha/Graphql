@@ -122,7 +122,7 @@ async function fetchUserInfo() {
 async function fetchXpData() {
     const query = `
         {
-            transaction(where: {type: {_eq: "xp"}}) {
+            transaction(where: {type: {_eq: "xp"} eventId: { _eq: 75 }}) {
                 id
                 amount
                 createdAt
@@ -246,13 +246,13 @@ async function loadXpData() {
             <div class="xp-summary">
                 <div class="xp-total">
                     <h3>Total XP</h3>
-                    <div class="xp-value">${totalXP.toLocaleString()}</div>
+                    <div class="xp-value">${(totalXP / 1_000_000).toFixed(2)} MB</div>
                 </div>
                 <div class="xp-projects">
                     <h3>Top Projects by XP</h3>
                     <ul>
                         ${sortedProjects.map(([project, xp]) => 
-                            `<li><span>${project}</span>: <strong>${xp.toLocaleString()} XP</strong></li>`
+                            `<li><span>${project}</span>: <strong>${(xp / 1_000_000).toFixed(2)} MB</strong></li>`
                         ).join('')}
                     </ul>
                 </div>
