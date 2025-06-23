@@ -122,7 +122,7 @@ async function fetchUserInfo() {
 async function fetchXpData() {
     const query = `
         {
-            transaction(where: {type: {_eq: "xp"} eventId: { _eq: 75 }}) {
+            transaction(where: {type: {_eq: "xp"} eventId: {_eq: 75}}) {
                 id
                 amount
                 createdAt
@@ -451,7 +451,8 @@ function drawXpOverTimeGraph() {
         
         xpByMonth[monthKey].xp += t.amount;
         cumulativeXP += t.amount;
-        xpByMonth[monthKey].cumulativeXP = cumulativeXP;
+        xpByMonth[monthKey].cumulativeXP = (cumulativeXP / 1048576).toFixed(2);
+        console.log("Cumulative XP:", xpByMonth[monthKey].cumulativeXP);
     });
     
     // Convert to array for easier use
@@ -604,7 +605,7 @@ function drawXpOverTimeGraph() {
     yLabel.setAttribute('font-size', '14');
     yLabel.setAttribute('fill', COLORS.darkBlue);
     yLabel.setAttribute('transform', `rotate(-90, ${margin.left - 40}, ${margin.top + graphHeight / 2})`);
-    yLabel.textContent = 'Cumulative XP';
+    yLabel.textContent = 'Cumulative XP (MB)';
     mainGroup.appendChild(yLabel);
     
     // Draw the line
@@ -685,7 +686,7 @@ function drawXpOverTimeGraph() {
                 text2.setAttribute('x', x + 20);
                 text2.setAttribute('y', y + 10);
                 text2.setAttribute('fill', COLORS.darkBlue);
-                text2.textContent = `XP: ${point.cumulativeXP.toLocaleString()}`;
+                text2.textContent = `XP: ${point.cumulativeXP.toFixed(2)} MB`;
                 tooltip.appendChild(text2);
                 
                 mainGroup.appendChild(tooltip);
