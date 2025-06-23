@@ -452,7 +452,7 @@ function drawXpOverTimeGraph() {
         xpByMonth[monthKey].xp += t.amount;
         cumulativeXP += t.amount;
         xpByMonth[monthKey].cumulativeXP = (cumulativeXP / 1048576).toFixed(2);
-        console.log("Cumulative XP:", xpByMonth[monthKey].cumulativeXP);
+        // console.log("Cumulative XP:", xpByMonth[monthKey].cumulativeXP);
     });
     
     // Convert to array for easier use
