@@ -451,7 +451,7 @@ function drawXpOverTimeGraph() {
         
         xpByMonth[monthKey].xp += t.amount;
         cumulativeXP += t.amount;
-        xpByMonth[monthKey].cumulativeXP = (cumulativeXP / 1048576).toFixed(2);
+        xpByMonth[monthKey].cumulativeXP = cumulativeXP / 1048576;
         // console.log("Cumulative XP:", xpByMonth[monthKey].cumulativeXP);
     });
     
@@ -572,7 +572,7 @@ function drawXpOverTimeGraph() {
         label.setAttribute('text-anchor', 'end');
         label.setAttribute('font-size', '12');
         label.setAttribute('fill', COLORS.darkBlue);
-        label.textContent = Math.round(value).toLocaleString();
+        label.textContent = value.toFixed(2);
         mainGroup.appendChild(label);
         
         // Grid line
