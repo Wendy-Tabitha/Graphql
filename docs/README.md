@@ -1,4 +1,4 @@
-# NodePro
+# Graphql
 
 A modern, responsive web application that displays user profile information and statistics using GraphQL.
 
