@@ -127,4 +127,4 @@ The application works in all modern browsers that support:
 
 ## License
 
-MIT License - See LICENSE file for details 
+MIT License - See [LICENSE](../docs/LICENSE) file for details  
